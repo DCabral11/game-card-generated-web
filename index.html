@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>City Game Card</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <h1>City Game Card</h1>
+      <p>Cartão digital para equipas e administração</p>
+    </header>
+
+    <main class="container">
+      <section id="loginView" class="card">
+        <h2>Iniciar sessão</h2>
+        <form id="loginForm" class="stack">
+          <label>
+            Utilizador
+            <input id="username" type="text" required autocomplete="username" />
+          </label>
+          <label>
+            Palavra-passe
+            <input id="password" type="password" required autocomplete="current-password" />
+          </label>
+          <button type="submit" class="btn btn-primary">Entrar</button>
+        </form>
+        <p class="hint">
+          Admin: <strong>admin</strong> / <strong>admin123</strong><br />
+          Equipas: <strong>team01</strong> a <strong>team40</strong> / <strong>city-01</strong> a
+          <strong>city-40</strong>
+        </p>
+      </section>
+
+      <section id="teamView" class="hidden">
+        <div class="top-bar card">
+          <div>
+            <h2 id="teamName">Equipa</h2>
+            <p>Pontuação total: <strong id="teamScore">0</strong></p>
+          </div>
+          <button id="logoutBtn" class="btn">Terminar sessão</button>
+        </div>
+
+        <div class="card">
+          <h3>Postos (10)</h3>
+          <p class="hint">Verde = por visitar | Vermelho = já registado</p>
+          <div id="postsGrid" class="posts-grid"></div>
+        </div>
+      </section>
+
+      <section id="adminView" class="hidden">
+        <div class="top-bar card">
+          <div>
+            <h2>Dashboard Admin</h2>
+            <p>Total de registos: <strong id="recordsCount">0</strong></p>
+          </div>
+          <div class="actions">
+            <button id="exportBtn" class="btn btn-primary">Exportar CSV (Excel)</button>
+            <button id="adminLogoutBtn" class="btn">Terminar sessão</button>
+          </div>
+        </div>
+
+        <div class="admin-layout">
+          <article class="card">
+            <h3>Ranking em tempo real</h3>
+            <ol id="rankingList" class="ranking"></ol>
+          </article>
+
+          <article class="card">
+            <h3>Histórico completo</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Data/Hora</th>
+                    <th>Equipa</th>
+                    <th>Posto</th>
+                    <th>Presença (+50)</th>
+                    <th>Jogo (0/100)</th>
+                    <th>Total registo</th>
+                  </tr>
+                </thead>
+                <tbody id="historyBody"></tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <div id="postModal" class="modal hidden" role="dialog" aria-modal="true">
+      <div class="modal-content card">
+        <h3 id="modalTitle">Registar posto</h3>
+        <form id="postForm" class="stack">
+          <label>
+            PIN do posto
+            <input id="postPin" type="password" inputmode="numeric" required />
+          </label>
+          <label>
+            Pontos do jogo (0 ou 100)
+            <input id="gamePoints" type="number" min="0" max="100" step="100" required />
+          </label>
+          <div class="actions">
+            <button type="button" id="cancelModal" class="btn">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Confirmar registo</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
